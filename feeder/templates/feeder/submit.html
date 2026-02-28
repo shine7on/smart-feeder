@@ -1,5 +1,13 @@
 <form method="POST" action="{% url 'confirm_example' %}">
     {% csrf_token %}
-    <input type="datetime-local" name="datetime" placeholder="Datetime">
+    <h1>Schedule the feeding time for your pet!</h1>
+    <p>{{current}}</p>
+    <input 
+        type="datetime-local" 
+        name="datetime" 
+        placeholder="Datetime" 
+        required=True
+        min={{current}} />
+    <br />
     <button type="submit">Schedule</button>
 </form>
