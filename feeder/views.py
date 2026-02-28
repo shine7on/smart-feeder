@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotAllowed
-from datetime import datetime
+from django.utils import timezone
 
 from .scheduleForm import ScheduleForm
 
@@ -20,14 +20,18 @@ def set_example(request):
     else:
         return HttpResponseNotAllowed('POST')
 
+# submit the form used  Django form: UNUSE
 def submit_form_example(request):
     form = ScheduleForm()
     return render(request, "feeder/submit_form.html", {"form":form})
 
+
 # how to submit the request (form)
 def submit_example(request):
-    today = datetime.now().strftime("%Y-%m-%dT%H:%M")
-    return render(request, "feeder/submit.html", {'current': today})
+    # Get the system's local timezone
+    now_local = timezone.localtime(timezone.now())
+    current = now_local.strftime("%Y-%m-%dT%H:%M")
+    return render(request, "feeder/submit.html", {'current': current})
 
 # how to show the confirm message
 def confirm_example(request):
