@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'confirm_example' %}">
+    {% csrf_token %}
+    <input type="datetime-local" name="datetime" placeholder="Datetime">
+    <button type="submit">Schedule</button>
+</form>

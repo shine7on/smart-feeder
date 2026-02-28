@@ -8,12 +8,23 @@ def hello_world(request):
 
 # how to accept request
 def set_example(request):
-    if request.method == POST:
-        time = request.POST.get('time')
+    if request.method == 'POST':
+        time = request.POST.get('datetime')
+
+        return HttpResponse(f"You posted: {time}")
     else:
         return HttpResponseNotAllowed('POST')
 
-    return HttpResponse(f"You posted: {time}")
+# how to submit the request (form)
+def submit_example(request):
+    return render(request, "feeder/submit.html")
+
+# how to show the confirm message
+def confirm_example(request):
+    if request.method == 'POST':
+        time = {"time": request.POST.get('datetime')}
+        return render(request, "feeder/confirm.html", time)
+
 
 '''
 def set_time (request):
