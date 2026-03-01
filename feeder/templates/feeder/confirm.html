@@ -1,5 +1,5 @@
-<form method="POST" action="{% url 'submit_example' %}">
+<form method="POST">
     {% csrf_token %}
     <p>You scheduled {{time}}</p>
-    <button type="button"><a href="submit_endpoint">ok</a></button>
+    <button type="button">ok</button>
 </form>

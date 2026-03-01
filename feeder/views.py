@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.utils import timezone
+from django.contrib import messages
 
 from .scheduleForm import ScheduleForm
+from .models import FeedingTime
 
 # Create your views here.
 def hello_world(request):
@@ -14,9 +16,10 @@ def set_example(request):
         form = ScheduleForm(request.POST)
         
         if form.is_valid():
-            time = form.cleaned_data["datetime"]
+            print("here")
+            datetime = form.cleaned_data["datetime"]
         
-        return render(request, "feeder/confirm.html", time)
+        return render(request, "feeder/confirm.html", datetime)
     else:
         return HttpResponseNotAllowed('POST')
 
@@ -38,3 +41,25 @@ def confirm_example(request):
     if request.method == 'POST':
         time = {"time": request.POST.get('datetime')}
         return render(request, "feeder/confirm.html", time)
+    
+
+# how to submit/receive request in one func w/ models
+def feeding_view(request):
+    if request.method == "POST":
+        form = ScheduleForm(request.POST)
+
+        if form.is_valid():
+            saved = form.save()
+            messages.success(
+                request,
+                f"Scheduled {timezone.localtime(saved.datetime).strftime('%Y-%m-%d %H:%M')}"
+            )
+            return redirect("feeding_view")  # redirect to GET
+    else:
+        form = ScheduleForm()
+        times = FeedingTime.objects.all().order_by('datetime')
+        print(times)
+        # Get the system's local timezone
+        now_local = timezone.localtime(timezone.now())
+        current = now_local.strftime("%Y-%m-%dT%H:%M")
+        return render(request, "feeder/main.html", {'form': form, 'times': times, 'current': current})

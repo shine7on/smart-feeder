@@ -1,0 +1,28 @@
+{% extends 'feeder/base.html' %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'feeding_view' %}">
+    {% csrf_token %}
+    <h1>Schedule the feeding time for your pet!</h1>
+    <h2>Select after current time {{current}}</h2>
+    {{ form.as_p }}
+    <button type="submit">Schedule</button>
+</form>
+
+<ul>
+{% for time in times %}
+    <li><b>{{time.datetime}}</b></li>
+{% endfor %}
+</ul>
+
+{% if messages %}
+  {% for message in messages %}
+    <div style="padding:10px; margin-bottom:15px; background-color:#d4edda; color:#155724; border:1px solid #c3e6cb;">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+{% endblock %}
+
