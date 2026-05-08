@@ -5,6 +5,7 @@ from django.contrib import messages
 
 from .scheduleForm import ScheduleForm
 from .models import FeedingTime
+from .serial_control import feed_dog
 
 # Create your views here.
 def hello_world(request):
@@ -63,3 +64,10 @@ def feeding_view(request):
         now_local = timezone.localtime(timezone.now())
         current = now_local.strftime("%Y-%m-%dT%H:%M")
         return render(request, "feeder/main.html", {'form': form, 'times': times, 'current': current})
+    
+
+def feed_now(request):
+
+    response = feed_dog()
+
+    return HttpResponse(response)
