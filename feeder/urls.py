@@ -8,7 +8,8 @@ urlpatterns = [
     path('confirm_endpoint',views.confirm_example, name = 'confirm_example' ),
     path('feeding', views.feeding_view, name = "feeding_view"),
     # UNUSE
-    path('submit2_endpoint',views.submit_form_example, name = 'submit2_example' )
+    path('submit2_endpoint',views.submit_form_example, name = 'submit2_example' ),
+    path('feed-now/', views.feed_now, name='feed_now')
 ]
 
 # feeding doesnt store them in db
