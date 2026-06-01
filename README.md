@@ -14,15 +14,15 @@ An IoT-based automated pet feeding system that combines **mechanical design**, *
 
 ### CAD Design
 
-<img src="images/cad_model.png" width="700"/>
+<img src="images/cad.png" width="400"/>
 
 ### Final Prototype
 
-<img src="images/final_feeder.jpg" width="700"/>
+<img src="images/feeder2.jpg" width="400"/>
 
 ### Electronics and Wiring
 
-<img src="images/circuit_diagram.png" width="700"/>
+<img src="images/wire.png" width="400"/>
 
 ---
 
