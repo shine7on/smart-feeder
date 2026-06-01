@@ -136,6 +136,6 @@ The scheduler then marks the feeding event as completed.
 
 **Shinon Takei**
 
-Physics Major, Grinnell College
+Computer Science Major, Grinnell College
 
-PHY-397 Senior Project (2026)
+PHY-397 Individual Study Project (2026)
